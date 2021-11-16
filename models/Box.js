@@ -1,32 +1,47 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
 const boxSchema = new Schema({
+  packingDate: {
+    type: Date,
+    default: Date.now,
+  },
   name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   description: {
-    type: String
+    type: String,
   },
-  images: {
-    type: String
-  },
+  images: [
+    {
+      type: String,
+    },
+  ],
   price: {
     type: Number,
     required: false,
-    min: 0.99
+    min: 0.99,
   },
-  quantity: {
-    type: Number,
-    min: 1,
-    default: 1
+  isMoving: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
+  isFragile: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
 });
 
-
-const Box = mongoose.model('Box', boxSchema);
+const Box = mongoose.model("Box", boxSchema);
 
 module.exports = Box;
