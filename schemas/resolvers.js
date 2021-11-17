@@ -60,6 +60,7 @@ const resolvers = {
     },
     //
     addBox: async (parent, args, context) => {
+      console.log(context);
       if (context.user) {
         const box = await Box.create(args);
 
